@@ -1,4 +1,4 @@
-PREFIX := /usr/local
+PREFIX ?= /usr/local
 BINPATH := $(PREFIX)/bin
 EXEC := pd.sh
 
