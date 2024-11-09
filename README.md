@@ -7,7 +7,7 @@ a bit easier from the command line on the Unix-like systems, using shell.
 
 Be sure that `PLAYDATE_SDK_PATH` is already set on your system.
 
-Somehing like:
+Something like this:
 
 ```sh
 echo "PLAYDATE_SDK_PATH=\"$HOME/PlaydateSDK-2.6.0\""
@@ -31,6 +31,8 @@ Run Makefile:
 
 ```sh
 make install
+# or
+sudo make install
 ```
 
 The default installation path is `/usr/local/bin`. Additionally, `PREFIX` can be
@@ -40,14 +42,15 @@ set, for example:
 PREFIX=/var/opt make install
 ```
 
-Or manually copy the `pd.sh` file to any desired directory in `$PATH`.
+Another option, without `make` utility, to copy manually the `pd.sh` file to 
+any desired directory in `$PATH` environment variable.
 
 ## Usage
 
 General command: `ps.sh [-hd <directory>] command` where, `-d` directory of the
 project (current directory) by default; `-h` prints help in the terminal.
 
-### Commans
+### Commands
 
 - **new**: Create a new project with an interactive prompt;
 - **run**: build and run a project;
