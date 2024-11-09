@@ -1,7 +1,15 @@
 # pd.sh
 
 A simple shell script to make development for [Playdate](https://play.date)
-a bit easier from the command line on the Unix-like systems, using shell.
+a bit easier from the command line on the Unix-like systems.
+
+## Features
+
+- **Create a new project with interactive prompt**
+- **Build a project**
+- **Run/Stop Playdate simulator**
+- **Wish your function in the [issues](https://github.com/dknight/pd.sh/issues)**
+  or [pull request](https://github.com/dknight/pd.sh/pulls).
 
 ## Install
 
