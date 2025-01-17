@@ -183,7 +183,7 @@ function usage() {
 	echo "Usage: pd.sh [-d <directory>] command"
 	echo "Options"
 	echo "  -d <directory>: project directory, current directory by default"
-	echo "  -h: print this usage information."
+	echo "  -h: print this help information."
 	echo "Commands:"
 	echo "  new: Create a new project with an interactive prompt;"
 	echo "  run: build and run a project;"

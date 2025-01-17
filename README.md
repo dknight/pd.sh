@@ -18,7 +18,7 @@ Be sure that `PLAYDATE_SDK_PATH` is already set on your system.
 Something like this:
 
 ```sh
-echo "PLAYDATE_SDK_PATH=\"$HOME/PlaydateSDK-2.6.0\""
+echo $PLAYDATE_SDK_PATH
 ```
 
 Clone this repo:
