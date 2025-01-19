@@ -20,6 +20,14 @@ Something like this:
 ```sh
 echo $PLAYDATE_SDK_PATH
 ```
+If nothing is printed then set it in yout shell config, e.g. `.bashrc` or
+`.zsh` depends on what terminal you use.
+
+Consider
+
+```sh
+echo "/path/to/your/PlaydateSDK-2.6.2" > "$HOME/.bashrc"
+```
 
 Clone this repo:
 
