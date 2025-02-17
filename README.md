@@ -4,7 +4,7 @@ A simple shell script to make development for [Playdate](https://play.date)
 a bit easier from the command line on the Unix-like systems.
 
 This tool is designed for [Playdate](https://play.date/)
-[![https://raw.githubusercontent.com/dknight/pd.sh/refs/heads/main/Playdate-platform-icon-inverted.svg](Playdate)](https://play.date/)
+[!(Playdate)[https://raw.githubusercontent.com/dknight/pd.sh/refs/heads/main/Playdate-platform-icon-inverted.svg]](https://play.date/)
 
 ## Features
 
