@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# License MIT 2024 Dmitri Smirnov <https://www.whoop.ee>
+# License MIT 2024-2025 Dmitri Smirnov <https://www.whoop.ee>
 #
 # TODO
 # - Test on MacOS
@@ -95,7 +95,7 @@ function new() {
 				exit 1
 			fi
 		fi
-		echo "Project path: $DIR"
+		echo "Project path: $( realpath $DIR )"
 
 		while true; do
 			read -p "Game name: " GANE_NAME
@@ -106,10 +106,10 @@ function new() {
 			fi
 		done
 		read -p "Author: " AUTHOR
-		read -p "Description " DESCRIPTION
+		read -p "Description: " DESCRIPTION
 		while true; do
 			read -p "Bundle ID: " BUNDLE_ID
-			if [[ -n "$BUNDLE_ID" &&  "$BUNDLE_ID" != *"."* ]]; then
+			if [[ -n "$BUNDLE_ID" && "$BUNDLE_ID" != *"."* ]]; then
 				echo "Bundle can be empty or follow reverse DNS notation."
 				echo "Example: com.john.doe"
 			else
@@ -117,10 +117,10 @@ function new() {
 			fi
 		done
 		while true; do
-			read -p "Version: " VERSION
+			read -e -p "Version: " -i "1.0.0" VERSION
 			if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+ ]]; then
-				echo "Version should match semver: major.minor[.patch"]
-				echo "Examples. 1.0.0, 0.2.4", 0.1, 1.2, etc.
+				echo "Version should match semver: major.minor[.patch]"
+				echo "Examples. 1.0.0, 0.2.4, 0.1, 1.2, etc."
 			else
 				break
 			fi
@@ -149,12 +149,12 @@ function new() {
 	done
 
 	mkdir -pv\
-		"$DIR"\
-		"$DIR/source"\
-		"$DIR/source/images"\
-		"$DIR/source/sounds"
+		"$( realpath $DIR )"\
+		"$( realpath $DIR )/source"\
+		"$( realpath $DIR )/source/images"\
+		"$( realpath $DIR )/source/sounds"
 
-	cat > "$DIR/source/main.lua" << EOL
+	cat > "$(realpath $DIR )/source/main.lua" << EOL
 import "CoreLibs/graphics"
 import "CoreLibs/object"
 import "CoreLibs/sprites"
@@ -167,14 +167,18 @@ gfx.clear()
 gfx.drawText("Hello World", 20, 20)
 end
 EOL
-	echo "Created: $DIR/source/main.lua"
+	echo "Created: $( realpath $DIR )/source/main.lua"
 
-	printf "$pdxcontent" > "$DIR/source/pdxinfo"
-	echo "Created: $DIR/source/pdxinfo"
+	printf "$pdxcontent" > "$( realpath $DIR )/source/pdxinfo"
+	echo "Created: $( realpath $DIR )/source/pdxinfo"
 
-	echo "/builds" > "$DIR/.gitignore"
+	echo "/builds" > "$( realpath $DIR )/.gitignore"
+
+	echo
+	echo "! Do not forget to change directory to $DIR"
+	echo "cd $( realpath $DIR )"
+	echo
 	echo "Done"
-
 	exit 0
 }
 
@@ -186,6 +190,8 @@ function usage() {
 	echo "  -h: print this help information."
 	echo "Commands:"
 	echo "  new: Create a new project with an interactive prompt;"
+	echo "    - Example: pd.sh -d <project_dir> new"
+	echo "    - Example: pd.sh new <project_dir>"
 	echo "  run: build and run a project;"
 	echo "  build:  build a project;"
 	echo "  stop: stop Playdate simulator, if running."
@@ -197,6 +203,11 @@ function usage() {
 DIR=$( pwd )
 BYE="Bye!"
 PID=
+
+# Also accept argument for new. No the best way, but should work.
+if [[ "$1" == "new" ]] && [[ -n "$2" ]]; then
+	DIR="$2"
+fi
 
 # For such small software there is no need to make large option parser.
 # Maybe in the future nice to have.

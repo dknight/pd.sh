@@ -30,7 +30,7 @@ If nothing is printed then set it in yout shell config, e.g. `.bashrc` or
 Consider
 
 ```sh
-echo "/path/to/your/PlaydateSDK-2.6.2" > "$HOME/.bashrc"
+echo "/path/to/your/PlaydateSDK-2.7.2" > "$HOME/.bashrc"
 ```
 
 Clone this repo:
@@ -55,8 +55,8 @@ make install
 sudo make install
 ```
 
-The default installation path is `/usr/local/bin`. Additionally, `PREFIX` can be
-set, for example:
+The default installation path is `/usr/local/bin`. Additionally, 
+`PREFIX` can be set to change the destination, for example:
 
 ```
 PREFIX=/var/opt make install
@@ -81,16 +81,21 @@ project (current directory) by default; `-h` prints help in the terminal.
 
 Create a new project:
 
- ```sh
- pd.sh new
- ```
- 
- Build a project in the current directory:
+```sh
+pd.sh new <project_dir>
+```
 
- ```sh
- pd.sh -d . new
- ```
+or
 
+```sh
+pd.sh -d <project_dir> new
+```
+
+Build a project in the current directory:
+
+```sh
+pd.sh new .
+```
 
 Build and run the project in Playdate Simulator:
 
