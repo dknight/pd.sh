@@ -77,7 +77,7 @@ project (current directory) by default; `-h` prints help in the terminal.
 - **build**: build a project;
 - **stop**: stop Playdate simulator, if running.
  
-### Examples
+#### Creating new project
 
 Create a new project:
 
@@ -115,15 +115,30 @@ autocomplete.
             "json"
     ],
     "diagnostics.disable": ["redefined-local"],
-    "diagnostics.neededFileStatus": {
-            "codestyle-check": "Any"
-    },
+    "diagnostics.neededFileStatus": {},
     "diagnostics.libraryFiles": "Disable",
     "completion.callSnippet": "Replace",
     "workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
     "workspace.ignoreDir": ["Source/external"]
 }
 ```
+
+#### LuaCATS for Panic PlaydateSDK
+
+LuaCATS provides better completeion documentation. If you install
+[notpeter/playdate-luacats](https://github.com/notpeter/playdate-luacats) and
+set the environment variable `PLAYDATE_LUACATS_PATH`, it will be automatically
+added to the workspace.library.
+
+### Builing the project
+
+Just build the project without running:
+
+```shell
+pd.sh build
+```
+
+### Builing the project and running the simulator
 
 Build and run the project in Playdate Simulator:
 
@@ -137,8 +152,20 @@ or run project detached:
 pd.sh run &
 ```
 
+### Stopping the simulator
+
 Stop Playdate Simulator, if running and detached:
 
 ```sh
 pd.sh stop
 ```
+
+## Contribution
+
+Any help is appreciated. Found a bug, typo, inaccuracy, etc.? Please do not
+hesitate to create a [pull request](https://github.com/dknight/pd.sh/pulls) or
+submit an [issue](https://github.com/dknight/pd.sh/issues).
+
+## License
+
+MIT 2024-2025 Dmitri Smirnov
