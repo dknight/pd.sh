@@ -1,4 +1,4 @@
-# 🟧 pd.sh
+# 🟨 pd.sh
 
 A simple shell script to make development for [Playdate](https://play.date)
 a bit easier from the command line on the Unix-like systems.
