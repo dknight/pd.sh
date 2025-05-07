@@ -131,7 +131,6 @@ function new() {
 		pdxcontent="${pdxcontent}version=$VERSION\n"
 		pdxcontent="${pdxcontent}buildNumber=0\n"
 
-		clear
 		printf "$pdxcontent"
 
 		read -p "Is this ok? [y/N] " ok
@@ -185,7 +184,7 @@ EOL
 	},
 	"diagnostics.libraryFiles": "Disable",
 	"completion.callSnippet": "Replace",
-	"workspace.library": ["\$PLAYDATE_SDK_PATH/CoreLibs"],
+	"workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
 	"workspace.ignoreDir": ["Source/external"]
 }
 EOL
