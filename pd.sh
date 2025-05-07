@@ -9,7 +9,6 @@ if [[ -z "$PLAYDATE_SDK_PATH" ]]; then
 	echo "PLAYDATE_SDK_PATH environment variable is not set."
 	exit 1
 fi
-
 if [[ "$OSTYPE" = "darwin" ]]; then
 	IS_MACOS=1
 fi
@@ -131,6 +130,7 @@ function new() {
 		pdxcontent="${pdxcontent}version=$VERSION\n"
 		pdxcontent="${pdxcontent}buildNumber=0\n"
 
+		echo "------------ pdxinfo ------------"
 		printf "$pdxcontent"
 
 		read -p "Is this ok? [y/N] " ok
@@ -184,7 +184,10 @@ EOL
 	},
 	"diagnostics.libraryFiles": "Disable",
 	"completion.callSnippet": "Replace",
-	"workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
+	"workspace.library": [
+		"$PLAYDATE_SDK_PATH/CoreLibs",
+		"$HOME/.config/playdate-luacats"
+	],
 	"workspace.ignoreDir": ["Source/external"]
 }
 EOL
