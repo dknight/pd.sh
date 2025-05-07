@@ -132,6 +132,7 @@ function new() {
 
 		echo "------------ pdxinfo ------------"
 		printf "$pdxcontent"
+		echo "---------------------------------"
 
 		read -p "Is this ok? [y/N] " ok
 		if [[ "$ok" = "y" || "$ok" = "Y" ]]; then
@@ -166,8 +167,13 @@ end
 EOL
 	echo "Created: $( realpath $DIR )/source/main.lua"
 
+	if [[ -n "PLAYDATE_LUACATS_PATH" ]]; then
+		PLAYDATE_LUACATS_PATH=",\"$PLAYDATE_LUACATS_PATH\""
+	fi
+
 	cat > "$(realpath $DIR )/source/.luarc.json" << EOL
 {
+	"\$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
 	"telemetry.enable": false,
 	"runtime.version": "Lua 5.4",
 	"runtime.special": {
@@ -179,15 +185,10 @@ EOL
 		"json"
 	],
 	"diagnostics.disable": ["redefined-local"],
-	"diagnostics.neededFileStatus": {
-		"codestyle-check": "Any"
-	},
+	"diagnostics.neededFileStatus": {},
 	"diagnostics.libraryFiles": "Disable",
 	"completion.callSnippet": "Replace",
-	"workspace.library": [
-		"$PLAYDATE_SDK_PATH/CoreLibs",
-		"$HOME/.config/playdate-luacats"
-	],
+	"workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"$PLAYDATE_LUACATS_PATH],
 	"workspace.ignoreDir": ["Source/external"]
 }
 EOL
