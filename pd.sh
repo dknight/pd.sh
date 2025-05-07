@@ -1,10 +1,8 @@
 #!/bin/sh
 
+###
 # License MIT 2024-2025 Dmitri Smirnov <https://www.whoop.ee>
-#
-# TODO
-# - Test on MacOS
-#
+###
 
 # Check PLAYDATE_SDK_PATH existence.
 if [[ -z "$PLAYDATE_SDK_PATH" ]]; then
@@ -168,6 +166,30 @@ function playdate.update()
 end
 EOL
 	echo "Created: $( realpath $DIR )/source/main.lua"
+
+	cat > "$(realpath $DIR )/source/.luarc.json" << EOL
+{
+	"telemetry.enable": false,
+	"runtime.version": "Lua 5.4",
+	"runtime.special": {
+		"import": "require"
+	},
+	"runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="],
+	"diagnostics.globals": [
+		"playdate",
+		"json"
+	],
+	"diagnostics.disable": ["redefined-local"],
+	"diagnostics.neededFileStatus": {
+		"codestyle-check": "Any"
+	},
+	"diagnostics.libraryFiles": "Disable",
+	"completion.callSnippet": "Replace",
+	"workspace.library": ["\$PLAYDATE_SDK_PATH/CoreLibs"],
+	"workspace.ignoreDir": ["Source/external"]
+}
+EOL
+	echo "Created: $( realpath $DIR )/source/.luarc.json"
 
 	printf "$pdxcontent" > "$( realpath $DIR )/source/pdxinfo"
 	echo "Created: $( realpath $DIR )/source/pdxinfo"

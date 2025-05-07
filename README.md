@@ -97,6 +97,34 @@ Build a project in the current directory:
 pd.sh new .
 ```
 
+## .luarc.json
+
+The **new** command will also create `.luarc.json` file, which helps use
+autocomplete.
+
+```json
+{
+    "telemetry.enable": false,
+    "runtime.version": "Lua 5.4",
+    "runtime.special": {
+            "import": "require"
+    },
+    "runtime.nonstandardSymbol": ["+=", "-=", "*=", "/="],
+    "diagnostics.globals": [
+            "playdate",
+            "json"
+    ],
+    "diagnostics.disable": ["redefined-local"],
+    "diagnostics.neededFileStatus": {
+            "codestyle-check": "Any"
+    },
+    "diagnostics.libraryFiles": "Disable",
+    "completion.callSnippet": "Replace",
+    "workspace.library": ["$PLAYDATE_SDK_PATH/CoreLibs"],
+    "workspace.ignoreDir": ["Source/external"]
+}
+```
+
 Build and run the project in Playdate Simulator:
 
 ```sh
