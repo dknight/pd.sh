@@ -4,11 +4,14 @@
 # License MIT 2024-2025 Dmitri Smirnov <https://www.whoop.ee>
 ###
 
+TEMP_PATH="/tmp/pd.sh.pid"
+
 # Check PLAYDATE_SDK_PATH existence.
 if [[ -z "$PLAYDATE_SDK_PATH" ]]; then
 	echo "PLAYDATE_SDK_PATH environment variable is not set."
 	exit 1
 fi
+
 if [[ "$OSTYPE" = "darwin" ]]; then
 	IS_MACOS=1
 fi
@@ -51,6 +54,17 @@ function get_pid() {
 	if [[ -n "$PID" ]]; then
 		echo "Playdate simulator PID $PID"
 	fi
+}
+
+# Saves the PID to temp dir.
+function save_pid() {
+	pid=$( get_pid )
+	echo $pid > "$TEMP_PATH" 2>/dev/null
+}
+
+# Removes the PID from temp dir.
+function clear_pid() {
+	rm -f "$TEMP_PATH"
 }
 
 # Stop Playdate simulator.
@@ -270,6 +284,7 @@ case "$1" in
 		;;
 	run)
 		run
+		save_pid
 		;;
 	build)
 		build
@@ -282,6 +297,15 @@ case "$1" in
 			exit 0
 		fi
 		stop
+		clear_pid
+		;;
+	restart)
+		stop
+		if [[ -f "$TEMP_PATH" ]]; then
+			run &
+		else
+			run
+		fi
 		;;
 	*)
 		usage

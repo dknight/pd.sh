@@ -21,7 +21,7 @@ Be sure that `PLAYDATE_SDK_PATH` is already set on your system.
 
 Something like this:
 
-```sh
+```shell
 echo $PLAYDATE_SDK_PATH
 ```
 If nothing is printed then set it in yout shell config, e.g. `.bashrc` or
@@ -29,19 +29,19 @@ If nothing is printed then set it in yout shell config, e.g. `.bashrc` or
 
 Consider
 
-```sh
+```shell
 echo "/path/to/your/PlaydateSDK-2.7.2" > "$HOME/.bashrc"
 ```
 
 Clone this repo:
 
-```sh
+```shell
 git clone https://github.com/dknight/pd.sh
 ```
 
 Change directory:
 
-```sh
+```shell
 cd pd.sh
 ```
 
@@ -49,7 +49,7 @@ Run Makefile:
 
 * Root privileges might be needed with the `sudo` command.
 
-```sh
+```shell
 make install
 # or
 sudo make install
@@ -81,19 +81,19 @@ project (current directory) by default; `-h` prints help in the terminal.
 
 Create a new project:
 
-```sh
+```shell
 pd.sh new <project_dir>
 ```
 
 or
 
-```sh
+```shell
 pd.sh -d <project_dir> new
 ```
 
 Build a project in the current directory:
 
-```sh
+```shell
 pd.sh new .
 ```
 
@@ -142,13 +142,13 @@ pd.sh build
 
 Build and run the project in Playdate Simulator:
 
-```sh
+```shell
 pd.sh run
 ```
 
 or run project detached:
 
-```sh
+```shell
 pd.sh run &
 ```
 
@@ -156,8 +156,17 @@ pd.sh run &
 
 Stop Playdate Simulator, if running and detached:
 
-```sh
+```shell
 pd.sh stop
+```
+
+### Restarting the simulator
+
+If the simulator was started in detached mode (background), this command will
+try to restart it also in the background mode.
+
+```shell
+pd.sh restart
 ```
 
 ## Contribution
